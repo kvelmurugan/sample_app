@@ -13,5 +13,10 @@ task populate: :environment do
     	password1 = "password"
     	User.create!(name: name1,email: email1,password: password1,password_confirmation: password1)
     end
+    users = User.all(limit: 6)
+    50.times do
+        content = Faker::Lorem.sentence(5)
+        users.each { |user| user.microposts.create!(content: content) }
+    end
     end
 end

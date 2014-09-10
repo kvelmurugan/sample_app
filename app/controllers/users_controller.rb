@@ -4,6 +4,7 @@ before_filter :correct_user,   only: [:edit, :update]
 before_filter :admin_user,	   only: :destroy
 def show
 @user = User.find(params[:id])
+@microposts = @user.microposts.paginate(page: params[:page])
 end	
 
   def edit
@@ -24,7 +25,11 @@ def index
 	@users = User.paginate(page: params[:page])
 end
 
-
+=begin
+	
+rescue Exception => e
+	
+end
 def signed_in_user
 	unless signed_in?
 		store_location
@@ -32,6 +37,8 @@ def signed_in_user
 	end
 
 end
+=end
+
 
 def destroy
 	User.find(params[:id]).destroy
