@@ -3,11 +3,20 @@
 <aside class="span4"> <section>
 <h1>
 <%= gravatar_for @user %>
-<%= @user.name %> </h1>
+<%= @user.name %></h1>
     </section>
+  
+<section>
+<%= render 'shared/stats' %> </section>
   </aside>
 
 <div class="span8">
+
+<% if current_user.following?(@user) %>
+<%= render 'unfollow' %>
+<% else %>
+<%= render 'follow' %>
+<% end %>
 <% if @user.microposts.any? %>
 <h3>Microposts (<%= @user.microposts.count %>)</h3>
 <ol class="microposts">
